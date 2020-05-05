@@ -84,6 +84,36 @@ namespace VeriTabaniCalismalari
 
 
         }
+        public void Update(Product product)
+        {
+            
+                ConnectionControl();
+                SqlCommand command = new SqlCommand("Update Products set Name=@name,UnitPrice=@unitPrice,StockAmoun=@stockAmoun where Id=@id", _connection);
+                command.Parameters.AddWithValue("@name", product.Name);
+                command.Parameters.AddWithValue("@unitPrice", product.UnitPrice);
+                command.Parameters.AddWithValue("@stockAmoun", product.StockAmoun);
+                command.Parameters.AddWithValue("@id", product.Id);
+                command.ExecuteNonQuery();
+
+                _connection.Close();
+           
+
+
+
+        }
+        public void Delete(int id)
+        {
+            ConnectionControl();
+            SqlCommand command = new SqlCommand(
+                "Delete from Products where Id=@id",_connection);
+            command.Parameters.AddWithValue("@id", id);
+            command.ExecuteNonQuery();
+            _connection.Close();
+
+
+
+
+        }
 
     }
 }
